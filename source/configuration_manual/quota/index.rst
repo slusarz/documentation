@@ -451,6 +451,8 @@ To change the quota grace, use:
     quota_grace = 50 M
   }
 
+.. _plugin-quota-setting-quota_max_mail_size:
+
 Maximum Saved Mail Size
 ^^^^^^^^^^^^^^^^^^^^^^^
 

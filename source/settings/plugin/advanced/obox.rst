@@ -283,13 +283,14 @@ The downside is that a caching IMAP client might become confused if it had
 previously seen different UIDs.
 
 .. _plugin-obox-setting_metacache_priority_weights:
-.. _plugin-obox-setting_metacache_size_weights:
 
 ``metacache_priority_weights``
 ------------------------------
 
+.. _plugin-obox-setting_metacache_size_weights:
+
 ``metacache_size_weights``
-------------------------------
+--------------------------
 
 .. code-block:: none
 
@@ -298,7 +299,8 @@ previously seen different UIDs.
      metacache_size_weights = 2M +30 1G +120
    }
 
-Whenever metacache notices that ``metacache_max_space`` has been reached, it
+Whenever metacache notices that
+:ref:``plugin-obox-setting_metacache_max_space`` has been reached, it
 needs to delete some older index files to make space for new ones. This is
 done by calculating cleanup weights.
 
@@ -333,8 +335,8 @@ The weight calculation is then done by:
  * If the total disk space used by the indexes is equal or less than the
    ``<percentage>``, add ``<weight adjustment>`` to weight. So, for example,
    with ``10% +1d`` if the disk space used by index files of this priority
-   type take <= 10% of ``metacache_max_space``, increase the weight by
-   ``1d = 60*60*24 = 86400``.
+   type take <= 10% of :ref:``plugin-obox-setting_metacache_max_space``,
+   increase the weight by ``1d = 60*60*24 = 86400``.
 
   * Because the initial weight is based on UNIX timestamp, the weight
     adjustment is also given as time. This practically means that e.g.

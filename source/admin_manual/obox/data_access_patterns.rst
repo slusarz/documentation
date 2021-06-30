@@ -1,4 +1,4 @@
-.. _data_access_patterns:
+.. _obox_data_access_patterns:
 
 ===========================
 Data Access Patterns
@@ -14,6 +14,8 @@ Below is a list of operations that dictmap does for accessing data.
 
 :blue:`BLUE = Object storage operations`
 
+.. _obox_data_access_patterns_refresh_root_index:
+
 * Refreshing user root index
 
    * Frequency: very often – nearly every time a user logs in or a mail is delivered
@@ -21,6 +23,8 @@ Below is a list of operations that dictmap does for accessing data.
    * :red:`Lookup object names from user_index_diff_objects for the given username.`
    * :blue:`Download any missing index bundle objects`
 
+
+.. _obox_data_access_patterns_refresh_folder_index:
 
 * Refreshing folder index
 
@@ -56,12 +60,16 @@ Below is a list of operations that dictmap does for accessing data.
    * :blue:`Upload new index bundle object`
    * :blue:`Delete old index bundle objects`
 
+.. _obox_data_access_patterns_folder_index:
+
 * Writing folder diff/self index
 
    * Frequency: often
 
-       * Every 10th mail delivery
-       * Every 5 minutes after IMAP client has changed the folder (flag changes, deletions)
+       * Every 10th mail delivery (default; see
+         :ref:`plugin-obox-setting_obox_max_rescan_mail_count`)
+       * Every 5 minutes after IMAP client has changed the folder (default;
+         see :ref:`plugin-obox-setting_metacache_upload_interval`)
 
    * :red:`Insert to user_mailbox_index_diff_objects (which overwrites the existing row)`
    * :blue:`Upload new index bundle object`
@@ -80,7 +88,8 @@ Below is a list of operations that dictmap does for accessing data.
 
 * Delivering a new email via LMTP, or saving a new email via IMAP APPEND
 
-   * Frequency: Write folder index (as described above) for every 10th mail delivery (default)
+   * Frequency: Write folder index (see
+     :ref:`writing folder indexes <obox_data_access_patterns_folder_index>`)
    * :red:`Insert to user_mailbox_objects`
    * :blue:`Upload new email object`
 
@@ -93,13 +102,15 @@ Below is a list of operations that dictmap does for accessing data.
 
    * :red:`Lookup object ID from user_mailbox_objects_reverse to get list of (user, folder, object name). Dovecot only cares if the result is empty or non-empty.`
    * :red:`Delete from user_mailbox_objects (user, folder, object name) and user_mailbox_objects_reverse (object ID)`
-   * Folder index is written lazily within the next 5 minutes
+   * Folder index is written lazily (see
+     :ref:`plugin-obox-setting_metacache_upload_interval`)
    * :blue:`Delete email object`
 
 * Copying email
 
    * :red:`Lookup object ID from user_mailbox_objects_reverse to get list of (user, folder, object name). Dovecot only cares if the result is empty or non-empty.`
-   * Write folder index (as described above) for every 10th mail delivery (default)
+   * Write folder index (see
+     :ref:`writing folder indexes <obox_data_access_patterns_folder_index>`)
 
 * Moving email
 
@@ -108,5 +119,7 @@ Below is a list of operations that dictmap does for accessing data.
 * Running "doveadm force-resync"
 
    * Frequency: Rarely, and always a manual operation
-   * Refresh user & folder indexes as described above.
+   * Refresh user & folder indexes. See
+     :ref:`refreshing root index <obox_data_access_patterns_refresh_root_index>` and
+     :ref:`refreshing folder index <obox_data_access_patterns_refresh_folder_index>`.
    * :red:`Lookup folder GUIDs from user_mailbox_index_diff_objects for the specified user to find any missing folders. With Cassandra this returns several duplicates (one per each index object in folder), which are de-duplicated internally.`

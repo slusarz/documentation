@@ -18,13 +18,15 @@ If the object storage access is fast, this cache doesn't need to be very large, 
 
 The mail object names look like: 
 
-user-hash/user@domain/mailboxes/folder-guid/oid
+.. code-block:: none
+
+  user-hash/user@domain/mailboxes/folder-guid/oid
 
 For example:
 
 .. code-block:: none
 
-   b5/899/user@example.com/mailboxes/00d7d12ea08a3153175e0000dfbea952/d88ff1001d4bf753a1b800001accfe22
+  b5/899/user@example.com/mailboxes/00d7d12ea08a3153175e0000dfbea952/d88ff1001d4bf753a1b800001accfe22
 
 
 Index Objects
@@ -40,12 +42,15 @@ This allows active-active multi-site setups to run safely during a split brain.
 
 The base index object names look like: 
 
-user-hash/user@domain/mailboxes/folder-guid/idx/bundle.timestamp-secs.timestamp-usecs.unique-id
+.. code-block:: none
+
+  user-hash/user@domain/mailboxes/folder-guid/idx/bundle.timestamp-secs.timestamp-usecs.unique-id
 
 For example:
 
 .. code-block:: none
 
-   b5/899/user@example.com/mailboxes/00d7d12ea08a3153175e0000dfbea952/idx/bundle.53f74dc2.0fbcf.c96d802b5d4df75307bb00001accfe22
+  b5/899/user@example.com/mailboxes/00d7d12ea08a3153175e0000dfbea952/idx/bundle.53f74dc2.0fbcf.c96d802b5d4df75307bb00001accfe22
 
-The diff index object names look the same, except another "-unique-id" is appended after the base bundle name.
+The diff index object names look the same, except another ``-unique-id`` is
+appended after the base bundle name.
