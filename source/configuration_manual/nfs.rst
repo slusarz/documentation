@@ -122,7 +122,7 @@ simultaneous mailbox access.
 
 New mail deliveries are often still handled by different computers. This
 isn't a problem with maildir as long as you're not using
-`LDA <https://wiki2.dovecot.org/LDA#>`__ (i.e. dovecot-uidlist file
+`LDA <https://wiki2.dovecot.org/LDA#>`_ (i.e. dovecot-uidlist file
 or index files shouldn't get updated). It shouldn't be a problem with
 mboxes either as long as you're using fcntl locking. This problem can be
 fully solved by using LMTP protocol to deliver the mails to the correct
@@ -134,16 +134,16 @@ NFS clients
 Here's a list of kernels that have been tried as NFS clients:
 
 -  `FreeBSD has a caching
-   bug <http://www.freebsd.org/cgi/query-pr.cgi?pr=123755>`__ which
+   bug <http://www.freebsd.org/cgi/query-pr.cgi?pr=123755>`_ which
    causes problems when mailbox is being accessed from different
    computers at the same time
 
 -  Linux 2.6.16: ``utime()`` is buggy, `fix in
-   here <http://client.linux-nfs.org/Linux-2.6.x/2.6.16/linux-2.6.16-007-fix_setattr_clobber.dif>`__.
+   here <http://client.linux-nfs.org/Linux-2.6.x/2.6.16/linux-2.6.16-007-fix_setattr_clobber.dif>`_.
    With the fix applied, utime() seems to work perfectly. High-volume
    systems may experience VFS lock sync issues and for these the
    complete patchset at
-   ` <http://www.linux-nfs.org/Linux-2.6.x/2.6.16/linux-2.6.16-NFS_ALL.dif>`__
+   http://www.linux-nfs.org/Linux-2.6.x/2.6.16/linux-2.6.16-NFS_ALL.dif
    is suggested and appears to work well in production.
 
 -  Linux 2.6.18: Seems to have intermittent caching issues. The same
@@ -152,10 +152,10 @@ Here's a list of kernels that have been tried as NFS clients:
 -  Linux 2.4.8: Has caching problems, don't know if they can be solved
 
 -  Solaris: If it's completely broken, see
-   ` <http://dovecot.org/list/dovecot/2006-December/018145.html>`__
+   http://dovecot.org/list/dovecot/2006-December/018145.html
 
 -  The Connectathon test suite is very useful to verify a healthy NFS
-   setup, see ` <http://www.connectathon.org/nfstests.html>`__
+   setup, see http://www.connectathon.org/nfstests.html
 
 Misc notes
 ==========
@@ -173,7 +173,7 @@ Misc notes
 
 -  To learn more about NFS caching and other issues, mostly from a
    programmer's point of view, see `NFS Coding
-   HOWTO <http://iki.fi/tss/nfs-coding-howto.html>`__
+   HOWTO <http://iki.fi/tss/nfs-coding-howto.html>`_
 
 -  Use such permissions for the unmounted mount point root directory
    that Dovecot can't create files under it. Otherwise if the NFS server

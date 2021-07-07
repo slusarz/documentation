@@ -122,7 +122,7 @@ possibilities for it are:
 
 -  sql: Shared SQL server
 
--  Any other `shared dictionary <https://wiki.dovecot.org/Dictionary>`__ can
+-  Any other `shared dictionary <https://wiki.dovecot.org/Dictionary>`_ can
    be used like described at :ref:`user_shared_mailboxes_shared_mailbox_listing`
 
 
